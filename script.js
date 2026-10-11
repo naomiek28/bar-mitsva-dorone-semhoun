@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const openButton = document.getElementById("openInvitation");
   const music = document.getElementById("backgroundMusic");
   const musicButton = document.getElementById("musicToggle");
+  let musicHasStarted = false;
   const form = document.getElementById("rsvpForm");
   const allEvents = document.getElementById("allEvents");
   const notAttending = document.getElementById("notAttending");
@@ -144,6 +145,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function startMusic() {
     if (!music) return;
+
+    if (!musicHasStarted) {
+      try {
+        music.currentTime = 30;
+      } catch (error) {
+        /* Le navigateur appliquera le départ dès que l'audio sera prêt. */
+      }
+      musicHasStarted = true;
+    }
 
     const playPromise = music.play();
 
