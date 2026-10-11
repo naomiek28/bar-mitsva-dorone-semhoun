@@ -210,6 +210,56 @@ body.motion-ready .paper.visible .hebrew-name span {
   animation: hebrewLetterWrite .46s cubic-bezier(.22, 1, .36, 1) var(--letter-delay) forwards !important;
 }
 
+/* Correction ciblee du cadre souvenir sur telephone. */
+@media (max-width: 600px) {
+  .memorial-section {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-right: 14px !important;
+    padding-left: 14px !important;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  .memorial-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-right: auto !important;
+    margin-left: auto !important;
+    padding: 8px !important;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  .memorial-photo {
+    position: relative;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+    box-sizing: border-box;
+  }
+
+  .memorial-photo > img {
+    position: absolute !important;
+    inset: 0 !important;
+    display: block;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center top !important;
+    transform: none !important;
+    transform-origin: center !important;
+  }
+
+  .memorial-overlay,
+  .memorial-letter {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
+  }
+}
+
 /* Bouton musical fixe pendant tout le defilement. */
 .music-toggle {
   position: fixed;
