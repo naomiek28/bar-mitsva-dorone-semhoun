@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>Bar Mitsva de Dorone Semhoun</title>
+  <meta name="description" content="Invitation à la Bar Mitsva de Dorone Semhoun">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="is-loading">
+  <div class="loader" id="loader"><div class="loader-inner"><img src="logo-dorone.png" alt="Monogramme DS"><div class="progress"><i></i></div></div></div>
+
+  <section class="welcome" id="welcome">
+    <div class="welcome-inner">
+      <img src="logo-dorone.png" alt="Monogramme DS">
+      <p class="caps">Bar Mitsva</p><h1>Dorone</h1><p class="subtitle">Ephraim Eliahou</p>
+      <button id="openInvitation" type="button">Voir l’invitation <b>↓</b></button>
+    </div>
+  </section>
+
+  <!-- Une seule image fixe, non étirée, derrière toute l’invitation -->
+  <div class="invitation-background" aria-hidden="true"><img src="background-dorone.jpg" alt=""><span></span></div>
+
+  <button class="music-toggle" id="musicToggle" type="button" aria-label="Mettre la musique en pause" title="Musique">
+    <span class="music-icon" aria-hidden="true">♪</span>
+  </button>
+  <audio id="backgroundMusic" src="musique-dorone.mp3" preload="auto" loop></audio>
+
+  <main id="invitation" class="invitation">
+    <section class="tefilines-section" id="tefilines">
+      <div class="paper reveal">
+        <img class="main-logo" src="logo-dorone.png" alt="Monogramme DS">
+        <div class="grandparents">
+          <div class="side"><p>M. et Mme Fernand<br>et Vivianne Semhoun</p></div><i></i>
+          <div class="side"><p>Mme Andrée Teboul</p><p>Mme Émilienne Abitboul</p><p>Mme Nanou Dahan</p></div>
+        </div>
+        <div class="close-family"><p class="parents">Gaëlle &amp; Stéphane Semhoun</p><p>entourés de Sharon, Erev &amp; Ethel</p></div>
+        <p class="announcement">ont la joie de vous faire part de la Bar Mitsva de leur fils</p>
+        <h2 class="dorone">Dorone</h2><p class="full-name">Ephraim Eliahou</p>
+        <p class="hebrew-name" lang="he" dir="rtl">דורון אפרים אליהו</p>
+        <p class="sentence">À l’occasion de la mise des téfilines</p><p class="date">Mercredi 9 décembre 2026 · 8 h 30</p>
+        <div class="rule"></div><p class="at">à la</p><h3>Synagogue Beth Menahem</h3>
+        <address>293 rue Francis-de-Pressensé<br>69100 Villeurbanne</address>
+        <div class="routes">
+          <a href="https://www.waze.com/ul?q=Synagogue%20Beth%20Menahem%2C%20293%20rue%20Francis-de-Pressens%C3%A9%2C%2069100%20Villeurbanne&navigate=yes" target="_blank" rel="noopener">Waze</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=Synagogue%20Beth%20Menahem%2C%20293%20rue%20Francis-de-Pressens%C3%A9%2C%2069100%20Villeurbanne" target="_blank" rel="noopener">Google Maps</a>
+        </div>
+        <p class="note">Un petit déjeuner suivra dans les salons Philibert David à Villeurbanne.</p>
+      </div>
+    </section>
+
+    <section class="memorial-section" id="souvenir-papy">
+      <div class="memorial-card reveal">
+        <div class="memorial-photo-placeholder">
+          <span>Cadre pour Papy…</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- BLOC CHABBAT INDÉPENDANT -->
+    <section class="event-section" id="chabbat">
+      <article class="event-card reveal">
+        <p class="event-date">Samedi 12 décembre 2026</p><h2>Chabbat</h2>
+        <p class="gold-text">Parachat Mikets · 2 tévet 5787</p><div class="event-rule"></div>
+        <p class="event-message">À l’occasion de la Bar Mitsva de Dorone, nous serions heureux de partager ce moment avec vous.</p>
+        <p class="kiddouch">Un kiddouch suivra l’office</p>
+      </article>
+    </section>
+
+    <section class="event-section" id="soiree">
+      <article class="event-card reveal">
+        <p class="event-date">Dimanche 21 février 2027</p><h2>Soirée</h2>
+        <p class="event-message evening-message">Nous serions heureux de célébrer avec vous la soirée de Bar Mitsva de Dorone.</p>
+        <h3>Les Terrasses du Parc</h3><address>115 boulevard de Stalingrad<br>69100 Villeurbanne</address>
+        <div class="routes">
+          <a href="https://www.waze.com/ul?q=Les%20Terrasses%20du%20Parc%2C%20115%20boulevard%20de%20Stalingrad%2C%2069100%20Villeurbanne&navigate=yes" target="_blank" rel="noopener">Waze</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=Les%20Terrasses%20du%20Parc%2C%20115%20boulevard%20de%20Stalingrad%2C%2069100%20Villeurbanne" target="_blank" rel="noopener">Google Maps</a>
+        </div>
+      </article>
+    </section>
+
+    <section class="rsvp-section" id="rsvp">
+      <form class="rsvp-card reveal" id="rsvpForm">
+        <p class="rsvp-label">Votre réponse</p><h2>RSVP</h2>
+        <p class="rsvp-intro">Merci de nous indiquer les moments auxquels vous serez présents.</p>
+        <label class="field"><span>Nom et prénom</span><input type="text" id="guestName" name="nom" autocomplete="name" required></label>
+        <fieldset><legend>Je serai présent(e) :</legend>
+          <label class="choice"><input type="checkbox" name="evenements" value="Mise des téfilines"><span>Mise des téfilines</span></label>
+          <label class="choice"><input type="checkbox" name="evenements" value="Chabbat"><span>Chabbat</span></label>
+          <label class="choice"><input type="checkbox" name="evenements" value="Soirée"><span>Soirée</span></label>
+          <label class="choice"><input type="checkbox" id="allEvents"><span>À tous les événements</span></label>
+          <label class="choice absence"><input type="checkbox" id="notAttending"><span>Je ne pourrai malheureusement pas être présent(e)</span></label>
+        </fieldset>
+        <label class="field"><span>Nombre de personnes</span><input type="number" name="personnes" min="1" max="20" value="1"></label>
+        <label class="field"><span>Message</span><textarea name="message" rows="4"></textarea></label>
+        <button class="submit-rsvp" type="submit">Valider ma réponse</button>
+        <p class="rsvp-status" id="rsvpStatus" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <footer><img src="logo-dorone.png" alt=""><p>Mazal Tov</p></footer>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
