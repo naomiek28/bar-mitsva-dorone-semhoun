@@ -7,11 +7,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const musicButton = document.getElementById("musicToggle");
   let musicHasStarted = false;
   const form = document.getElementById("rsvpForm");
-  const allEvents = document.getElementById("allEvents");
-  const notAttending = document.getElementById("notAttending");
-  const eventChoices = Array.from(
-    document.querySelectorAll('input[name="evenements"]')
-  );
+  const googleScriptUrl = "https://script.google.com/macros/s/AKfycbwD_z-36nKFTdlXVTAczIheRID0xgtHmOb1j9_8REmtL8c22D7fPjLtwmfnVPgWmvb9/exec";
+  const responseGroups = Array.from(document.querySelectorAll(".event-response"));
 
   prepareHebrewName();
   prepareElegantDelays();
@@ -55,71 +52,74 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  if (allEvents) {
-    allEvents.addEventListener("change", function () {
-      eventChoices.forEach(function (choice) {
-        choice.checked = allEvents.checked;
+  responseGroups.forEach(function (group) {
+    const radios = Array.from(group.querySelectorAll('input[type="radio"]'));
+    const countField = group.querySelector(".attendance-count");
+    const countInput = countField ? countField.querySelector('input[type="number"]') : null;
+
+    radios.forEach(function (radio) {
+      radio.addEventListener("change", function () {
+        const isPresent = radio.checked && radio.value === "Présent(e)";
+        if (!countField || !countInput) return;
+        countField.hidden = !isPresent;
+        countInput.disabled = !isPresent;
+        countInput.required = isPresent;
+        if (!isPresent) countInput.value = "1";
       });
-
-      if (allEvents.checked && notAttending) {
-        notAttending.checked = false;
-      }
-    });
-  }
-
-  if (notAttending) {
-    notAttending.addEventListener("change", function () {
-      if (!notAttending.checked) return;
-
-      eventChoices.forEach(function (choice) {
-        choice.checked = false;
-      });
-
-      if (allEvents) allEvents.checked = false;
-    });
-  }
-
-  eventChoices.forEach(function (choice) {
-    choice.addEventListener("change", function () {
-      if (choice.checked && notAttending) {
-        notAttending.checked = false;
-      }
-
-      if (allEvents) {
-        allEvents.checked = eventChoices.every(function (item) {
-          return item.checked;
-        });
-      }
     });
   });
 
   if (form) {
-    form.addEventListener("submit", function (event) {
+    form.addEventListener("submit", async function (event) {
       event.preventDefault();
 
       const status = document.getElementById("rsvpStatus");
-      const selected = eventChoices.filter(function (choice) {
-        return choice.checked;
-      });
+      const submitButton = form.querySelector(".submit-rsvp");
+      const formData = new FormData(form);
+      const data = {
+        nom: String(formData.get("nom") || "").trim(),
+        reponseTefilines: formData.get("reponseTefilines") || "",
+        nombreTefilines: formData.get("reponseTefilines") === "Présent(e)" ? formData.get("nombreTefilines") || "1" : "",
+        reponseChabbat: formData.get("reponseChabbat") || "",
+        nombreChabbat: formData.get("reponseChabbat") === "Présent(e)" ? formData.get("nombreChabbat") || "1" : "",
+        reponseSoiree: formData.get("reponseSoiree") || "",
+        nombreSoiree: formData.get("reponseSoiree") === "Présent(e)" ? formData.get("nombreSoiree") || "1" : "",
+        message: String(formData.get("message") || "").trim()
+      };
 
-      if (!selected.length && !(notAttending && notAttending.checked)) {
-        status.textContent = "Choisissez au moins une réponse.";
+      status.textContent = "Envoi de votre réponse…";
+      status.className = "rsvp-status";
+      submitButton.disabled = true;
+
+      try {
+        await fetch(googleScriptUrl, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify(data)
+        });
+
+        localStorage.setItem("dorone-rsvp", JSON.stringify(data));
+        status.textContent = "Merci, votre réponse a bien été envoyée.";
+        status.className = "rsvp-status success";
+        form.reset();
+
+        responseGroups.forEach(function (group) {
+          const countField = group.querySelector(".attendance-count");
+          const countInput = countField ? countField.querySelector('input[type="number"]') : null;
+          if (countField) countField.hidden = true;
+          if (countInput) {
+            countInput.disabled = true;
+            countInput.required = false;
+            countInput.value = "1";
+          }
+        });
+      } catch (error) {
+        status.textContent = "L’envoi n’a pas fonctionné. Merci de réessayer.";
         status.className = "rsvp-status error";
-        return;
+      } finally {
+        submitButton.disabled = false;
       }
-
-      const data = Object.fromEntries(new FormData(form).entries());
-      data.evenements =
-        notAttending && notAttending.checked
-          ? ["Absent(e)"]
-          : selected.map(function (choice) {
-              return choice.value;
-            });
-
-      localStorage.setItem("dorone-rsvp", JSON.stringify(data));
-      status.textContent =
-        "Votre réponse est bien enregistrée sur cet appareil.";
-      status.className = "rsvp-status success";
     });
   }
 
@@ -148,7 +148,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (!musicHasStarted) {
       try {
-        music.currentTime = 279;
+        music.currentTime = 0;
       } catch (error) {
         /* Le navigateur appliquera le départ dès que l'audio sera prêt. */
       }
