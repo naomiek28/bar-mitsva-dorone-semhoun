@@ -569,7 +569,6 @@ a[href$=".ics"] {
   -webkit-tap-highlight-color: transparent;
 }
 
-.routes a::before,
 .calendar-link::before,
 a[href$=".ics"]::before {
   color: var(--ui-gold);
@@ -578,8 +577,6 @@ a[href$=".ics"]::before {
   line-height: 1;
 }
 
-.routes a[href*="waze"]::before { content: "⌖"; }
-.routes a[href*="google"]::before { content: "↗"; }
 .calendar-link::before,
 a[href$=".ics"]::before { content: "＋"; }
 
