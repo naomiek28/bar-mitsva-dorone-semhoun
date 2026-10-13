@@ -1364,5 +1364,10 @@ body.invitation-open footer{position:relative;z-index:2}
 
   .memorial-letter {
     font-size: 15.4px !important;
+    min-height: 820px !important;
+    height: auto !important;
+    transform: translateY(64px) !important;
+    top: auto !important;
+    padding: 34px 22px !important;
   }
 }
