@@ -1357,3 +1357,7 @@ body.invitation-open footer{position:relative;z-index:2}
     animation: hebrewLetterWrite .46s cubic-bezier(.22, 1, .36, 1) var(--letter-delay) forwards !important;
   }
 }
+.memorial-letter {
+  font-size: 15px !important;
+  top: 15% !important;
+}
