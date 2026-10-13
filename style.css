@@ -628,6 +628,10 @@ body.motion-ready .paper.visible .hebrew-name span {
   .memorial-card { width: 100%; }
   .memorial-photo,
   .memorial-letter { min-height: 820px; }
+  .memorial-photo > img {
+    object-position: center top;
+    transform: none;
+  }
   .memorial-letter {
     padding: 34px 22px;
     font-size: 14px;
