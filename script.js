@@ -182,7 +182,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (!musicHasStarted) {
       try {
-        music.currentTime = 55;
+        music.currentTime = 279;
       } catch (error) {
         /* Le navigateur appliquera le départ dès que l'audio sera prêt. */
       }
