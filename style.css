@@ -1358,24 +1358,10 @@ body.invitation-open footer{position:relative;z-index:2}
   }
 }
 
-/* Lettre souvenir : 18 px sans décalage */
-
 @media (max-width: 430px) {
-  .memorial-photo {
-    min-height: 820px;
-    overflow: hidden;
-  }
-
   .memorial-letter {
-    min-height: 820px;
-    height: auto;
-    font-size: 17px !important;
-    line-height: 1.35 !important;
-    padding: 25px 20px !important;
+    font-size: 16.5px !important;
+    line-height: 1.43 !important;
     transform: none !important;
-  }
-
-  .memorial-letter p {
-    margin-bottom: 10px;
   }
 }
