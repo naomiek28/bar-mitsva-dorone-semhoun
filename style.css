@@ -575,7 +575,7 @@ body.motion-ready .paper.visible .hebrew-name span {
   padding: clamp(30px, 8vw, 58px) clamp(24px, 7vw, 54px);
   color: #f4ead8;
   font-family: "Cormorant Garamond", serif;
-  font-size: clamp(17px, 3.8vw, 19px);
+  font-size: clamp(19px, 3.9vw, 21px);
   font-style: italic;
   line-height: 1.48;
   text-align: center;
