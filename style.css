@@ -1358,33 +1358,24 @@ body.invitation-open footer{position:relative;z-index:2}
   }
 }
 
-/* Lettre souvenir : taille légèrement agrandie */
-
-.memorial-photo {
-  min-height: 760px;
-  overflow: hidden;
-}
-
-.memorial-letter {
-  min-height: 760px;
-  font-size: 20px;
-  line-height: 1.48;
-  transform: translateY(64px);
-}
+/* Lettre souvenir : 18 px sans décalage */
 
 @media (max-width: 430px) {
-  .memorial-photo,
-  .memorial-letter {
+  .memorial-photo {
     min-height: 820px;
+    overflow: hidden;
   }
 
   .memorial-letter {
-    font-size: 16px;
-    line-height: 1.43;
-    padding: 34px 22px;
+    min-height: 820px;
+    height: auto;
+    font-size: 18px !important;
+    line-height: 1.35 !important;
+    padding: 25px 20px !important;
+    transform: none !important;
   }
 
   .memorial-letter p {
-    margin-bottom: 14px;
+    margin-bottom: 10px;
   }
 }
