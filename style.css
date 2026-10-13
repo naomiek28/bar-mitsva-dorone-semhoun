@@ -128,6 +128,7 @@ footer{position:relative;z-index:2;padding:75px 20px 50px;border-top:1px solid r
   animation: hebrewLetterWrite .46s cubic-bezier(.22, 1, .36, 1) var(--letter-delay) forwards !important;
 }
 
+
 /* Crédit discret en bas du faire-part */
 .creator-credit {
   width: min(100%, 390px);
@@ -1262,4 +1263,45 @@ body.invitation-open footer{position:relative;z-index:2}
 
 .paper.visible .hebrew-name span {
   animation: hebrewLetterWrite .46s cubic-bezier(.22, 1, .36, 1) var(--letter-delay) forwards !important;
+}
+
+/* Seulement sur téléphone : photo légèrement dézoomée et animation stable. */
+@media (max-width: 600px) {
+  .memorial-photo > img {
+    object-fit: cover !important;
+    object-position: center top !important;
+    transform: translateY(-1%) scale(.94) !important;
+    transform-origin: center top !important;
+  }
+
+  body.motion-ready .reveal {
+    opacity: 0 !important;
+    transform: translate3d(0, 10px, 0) !important;
+    filter: none !important;
+    clip-path: none !important;
+    animation: none !important;
+    transition: opacity .65s ease, transform .65s cubic-bezier(.22, 1, .36, 1) !important;
+    backface-visibility: hidden;
+    will-change: opacity, transform;
+  }
+
+  body.motion-ready .reveal.visible {
+    opacity: 1 !important;
+    transform: translate3d(0, 0, 0) !important;
+  }
+
+  body.motion-ready .paper > *:not(.hebrew-name),
+  body.motion-ready .event-card > *,
+  body.motion-ready .rsvp-card > * {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    clip-path: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+
+  body.motion-ready .paper.visible .hebrew-name span {
+    animation: hebrewLetterWrite .46s cubic-bezier(.22, 1, .36, 1) var(--letter-delay) forwards !important;
+  }
 }
