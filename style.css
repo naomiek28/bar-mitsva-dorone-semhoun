@@ -1358,6 +1358,18 @@ body.invitation-open footer{position:relative;z-index:2}
   }
 }
 .memorial-letter {
-  font-size: 15px !important;
+  font-size: 15.3px !important;
   top: 15% !important;
+}
+.memorial-card .memorial-letter p {
+  margin: 0 0 3px !important;
+  padding: 0 !important;
+}
+
+.memorial-card .memorial-letter .memorial-title {
+  margin-bottom: 3px !important;
+}
+
+.memorial-card .memorial-letter .memorial-signature {
+  margin-top: 3px !important;
 }
