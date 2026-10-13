@@ -1358,45 +1358,33 @@ body.invitation-open footer{position:relative;z-index:2}
   }
 }
 
-/* Lettre souvenir — texte plus grand et lisible */
-.memorial-letter {
-  font-size: clamp(20px, 4.5vw, 23px) !important;
-  line-height: 1.55 !important;
-}
-
-@media (max-width: 430px) {
-  .memorial-letter {
-    font-size: 19px !important;
-    line-height: 1.5 !important;
-    padding: 34px 22px;
-  }
-}
-/* CORRECTION : lettre souvenir jamais coupée */
+/* Lettre souvenir : taille légèrement agrandie */
 
 .memorial-photo {
-  height: auto !important;
   min-height: 760px;
-  overflow: visible !important;
+  overflow: hidden;
 }
 
 .memorial-letter {
-  height: auto !important;
   min-height: 760px;
-  padding: 55px 30px !important;
-  transform: none !important;
-  overflow: visible !important;
+  font-size: 20px;
+  line-height: 1.48;
+  transform: translateY(64px);
 }
 
 @media (max-width: 430px) {
   .memorial-photo,
   .memorial-letter {
-    height: auto !important;
-    min-height: 0 !important;
+    min-height: 820px;
   }
 
   .memorial-letter {
-    font-size: 19px !important;
-    line-height: 1.5 !important;
-    padding: 55px 22px !important;
+    font-size: 16px;
+    line-height: 1.43;
+    padding: 34px 22px;
+  }
+
+  .memorial-letter p {
+    margin-bottom: 14px;
   }
 }
