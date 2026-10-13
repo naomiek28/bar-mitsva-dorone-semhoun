@@ -181,14 +181,37 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!music) return;
 
     if (!musicHasStarted) {
-      try {
-        music.currentTime = 279;
-      } catch (error) {
-        /* Le navigateur appliquera le départ dès que l'audio sera prêt. */
-      }
       musicHasStarted = true;
+
+      const seekToThreeMinutes = function () {
+        const restoreSound = function () {
+          music.muted = false;
+        };
+
+        music.currentTime = 180;
+
+        if (music.seeking) {
+          music.addEventListener("seeked", restoreSound, { once: true });
+        } else {
+          restoreSound();
+        }
+      };
+
+      if (music.readyState >= 1) {
+        seekToThreeMinutes();
+        playMusic();
+      } else {
+        music.muted = true;
+        music.addEventListener("loadedmetadata", seekToThreeMinutes, { once: true });
+        playMusic();
+      }
+      return;
     }
 
+    playMusic();
+  }
+
+  function playMusic() {
     const playPromise = music.play();
 
     if (playPromise && typeof playPromise.catch === "function") {
