@@ -8,7 +8,8 @@ document.addEventListener("DOMContentLoaded", function () {
   let musicHasStarted = false;
   const form = document.getElementById("rsvpForm");
   const googleScriptUrl = "https://script.google.com/macros/s/AKfycbwD_z-36nKFTdlXVTAczIheRID0xgtHmOb1j9_8REmtL8c22D7fPjLtwmfnVPgWmvb9/exec";
-  const responseGroups = Array.from(document.querySelectorAll(".event-response"));
+  const attendanceEvents = Array.from(document.querySelectorAll(".attendance-event"));
+  const notAttending = document.getElementById("notAttending");
 
   prepareHebrewName();
   prepareElegantDelays();
@@ -52,22 +53,40 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  responseGroups.forEach(function (group) {
-    const radios = Array.from(group.querySelectorAll('input[type="radio"]'));
-    const countField = group.querySelector(".attendance-count");
-    const countInput = countField ? countField.querySelector('input[type="number"]') : null;
+  attendanceEvents.forEach(function (eventBlock) {
+    const checkbox = eventBlock.querySelector('.event-choice input[type="checkbox"]');
+    const counts = eventBlock.querySelector(".guest-counts");
+    const numberInputs = Array.from(eventBlock.querySelectorAll('input[type="number"]'));
 
-    radios.forEach(function (radio) {
-      radio.addEventListener("change", function () {
-        const isPresent = radio.checked && radio.value === "Présent(e)";
-        if (!countField || !countInput) return;
-        countField.hidden = !isPresent;
-        countInput.disabled = !isPresent;
-        countInput.required = isPresent;
-        if (!isPresent) countInput.value = "1";
+    checkbox.addEventListener("change", function () {
+      counts.hidden = !checkbox.checked;
+      numberInputs.forEach(function (input) {
+        input.disabled = !checkbox.checked;
       });
+
+      if (checkbox.checked && notAttending) {
+        notAttending.checked = false;
+      }
     });
   });
+
+  if (notAttending) {
+    notAttending.addEventListener("change", function () {
+      if (!notAttending.checked) return;
+
+      attendanceEvents.forEach(function (eventBlock) {
+        const checkbox = eventBlock.querySelector('.event-choice input[type="checkbox"]');
+        const counts = eventBlock.querySelector(".guest-counts");
+        const numberInputs = Array.from(eventBlock.querySelectorAll('input[type="number"]'));
+        checkbox.checked = false;
+        counts.hidden = true;
+        numberInputs.forEach(function (input, index) {
+          input.disabled = true;
+          input.value = index === 0 ? "1" : "0";
+        });
+      });
+    });
+  }
 
   if (form) {
     form.addEventListener("submit", async function (event) {
@@ -76,14 +95,30 @@ document.addEventListener("DOMContentLoaded", function () {
       const status = document.getElementById("rsvpStatus");
       const submitButton = form.querySelector(".submit-rsvp");
       const formData = new FormData(form);
+      const hasAttendance = attendanceEvents.some(function (eventBlock) {
+        const checkbox = eventBlock.querySelector('.event-choice input[type="checkbox"]');
+        return checkbox.checked;
+      });
+
+      if (!hasAttendance && !(notAttending && notAttending.checked)) {
+        status.textContent = "Cochez au moins un événement ou indiquez que vous ne pourrez pas être présents.";
+        status.className = "rsvp-status error";
+        return;
+      }
+
+      const absenceComplete = Boolean(notAttending && notAttending.checked);
+      const texteAbsence = "Ne pourront pas être présents";
       const data = {
         nom: String(formData.get("nom") || "").trim(),
-        reponseTefilines: formData.get("reponseTefilines") || "",
-        nombreTefilines: formData.get("reponseTefilines") === "Présent(e)" ? formData.get("nombreTefilines") || "1" : "",
-        reponseChabbat: formData.get("reponseChabbat") || "",
-        nombreChabbat: formData.get("reponseChabbat") === "Présent(e)" ? formData.get("nombreChabbat") || "1" : "",
-        reponseSoiree: formData.get("reponseSoiree") || "",
-        nombreSoiree: formData.get("reponseSoiree") === "Présent(e)" ? formData.get("nombreSoiree") || "1" : "",
+        presenceTefilines: absenceComplete ? texteAbsence : formData.get("presenceTefilines") || "",
+        adultesTefilines: !absenceComplete && formData.get("presenceTefilines") ? formData.get("adultesTefilines") || "0" : "",
+        enfantsTefilines: !absenceComplete && formData.get("presenceTefilines") ? formData.get("enfantsTefilines") || "0" : "",
+        presenceChabbat: absenceComplete ? texteAbsence : formData.get("presenceChabbat") || "",
+        adultesChabbat: !absenceComplete && formData.get("presenceChabbat") ? formData.get("adultesChabbat") || "0" : "",
+        enfantsChabbat: !absenceComplete && formData.get("presenceChabbat") ? formData.get("enfantsChabbat") || "0" : "",
+        presenceSoiree: absenceComplete ? texteAbsence : formData.get("presenceSoiree") || "",
+        adultesSoiree: !absenceComplete && formData.get("presenceSoiree") ? formData.get("adultesSoiree") || "0" : "",
+        enfantsSoiree: !absenceComplete && formData.get("presenceSoiree") ? formData.get("enfantsSoiree") || "0" : "",
         message: String(formData.get("message") || "").trim()
       };
 
@@ -104,15 +139,14 @@ document.addEventListener("DOMContentLoaded", function () {
         status.className = "rsvp-status success";
         form.reset();
 
-        responseGroups.forEach(function (group) {
-          const countField = group.querySelector(".attendance-count");
-          const countInput = countField ? countField.querySelector('input[type="number"]') : null;
-          if (countField) countField.hidden = true;
-          if (countInput) {
-            countInput.disabled = true;
-            countInput.required = false;
-            countInput.value = "1";
-          }
+        attendanceEvents.forEach(function (eventBlock) {
+          const counts = eventBlock.querySelector(".guest-counts");
+          const numberInputs = Array.from(eventBlock.querySelectorAll('input[type="number"]'));
+          counts.hidden = true;
+          numberInputs.forEach(function (input, index) {
+            input.disabled = true;
+            input.value = index === 0 ? "1" : "0";
+          });
         });
       } catch (error) {
         status.textContent = "L’envoi n’a pas fonctionné. Merci de réessayer.";
@@ -148,7 +182,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (!musicHasStarted) {
       try {
-        music.currentTime = 279;
+        music.currentTime = 55;
       } catch (error) {
         /* Le navigateur appliquera le départ dès que l'audio sera prêt. */
       }
