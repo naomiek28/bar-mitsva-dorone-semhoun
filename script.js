@@ -26,7 +26,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
       window.scrollTo(0, 0);
 
-      startMusic();
+      function startMusic() {
+    if (!music) return;
+
+    if (!musicHasStarted) {
+      try {
+        music.currentTime = 18;
+      } catch (error) {
+        /* Le navigateur appliquera le départ dès que l'audio sera prêt. */
+      }
+      musicHasStarted = true;
+    }
 
       window.requestAnimationFrame(function () {
         window.requestAnimationFrame(revealSections);
