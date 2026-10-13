@@ -1265,14 +1265,66 @@ body.invitation-open footer{position:relative;z-index:2}
   animation: hebrewLetterWrite .46s cubic-bezier(.22, 1, .36, 1) var(--letter-delay) forwards !important;
 }
 
-/* Seulement sur téléphone : photo légèrement dézoomée et animation stable. */
+/* Photo de Papi : proportions originales, cadre ajusté et texte superposé. */
+.memorial-photo {
+  position: relative !important;
+  min-height: 0 !important;
+  overflow: hidden;
+}
+
+.memorial-photo > img {
+  position: relative !important;
+  inset: auto !important;
+  display: block;
+  width: 100% !important;
+  height: auto !important;
+  max-height: none !important;
+  object-fit: contain !important;
+  object-position: center center !important;
+  transform: none !important;
+  transform-origin: center center !important;
+}
+
+.memorial-overlay {
+  position: absolute !important;
+  inset: 0 !important;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, .05) 0%,
+    rgba(0, 0, 0, .42) 22%,
+    rgba(0, 0, 0, .76) 100%
+  ) !important;
+}
+
+.memorial-letter {
+  position: absolute !important;
+  top: 25% !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  min-height: 0 !important;
+  justify-content: flex-start !important;
+  padding: clamp(12px, 3.5vw, 30px) clamp(18px, 5vw, 44px) clamp(16px, 4vw, 32px) !important;
+  overflow: hidden;
+  font-size: clamp(10px, 2.7vw, 17px) !important;
+  line-height: 1.25 !important;
+  transform: none !important;
+}
+
+.memorial-letter p {
+  margin-bottom: clamp(7px, 1.8vw, 15px) !important;
+}
+
+.memorial-title {
+  font-size: clamp(19px, 5vw, 32px) !important;
+}
+
+.memorial-signature {
+  font-size: clamp(17px, 4.6vw, 26px) !important;
+}
+
+/* Sur téléphone : une seule animation stable pour chaque cadre. */
 @media (max-width: 600px) {
-  .memorial-photo > img {
-    object-fit: cover !important;
-    object-position: center top !important;
-    transform: translateY(-1%) scale(.72) !important;
-    transform-origin: center top !important;
-  }
 
   body.motion-ready .reveal {
     opacity: 0 !important;
