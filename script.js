@@ -179,35 +179,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function startMusic() {
     if (!music) return;
-
-    if (!musicHasStarted) {
-      musicHasStarted = true;
-
-      const seekToThreeMinutes = function () {
-        const restoreSound = function () {
-          music.muted = false;
-        };
-
-        music.currentTime = 180;
-
-        if (music.seeking) {
-          music.addEventListener("seeked", restoreSound, { once: true });
-        } else {
-          restoreSound();
-        }
-      };
-
-      if (music.readyState >= 1) {
-        seekToThreeMinutes();
-        playMusic();
-      } else {
-        music.muted = true;
-        music.addEventListener("loadedmetadata", seekToThreeMinutes, { once: true });
-        playMusic();
-      }
-      return;
-    }
-
+    musicHasStarted = true;
     playMusic();
   }
 
