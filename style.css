@@ -1360,13 +1360,12 @@ body.invitation-open footer{position:relative;z-index:2}
 
 @media (max-width: 430px) {
   .memorial-letter {
-    font-size: 16.3px !important;
+    font-size: 16.2px !important;
     line-height: 1.43 !important;
-
     transform: none !important;
-    justify-content: center !important;
 
-    padding-top: 15px !important;
-    padding-bottom: 65px !important;
+    justify-content: center !important;
+    padding-top: 24.4px !important;
+    padding-bottom: 43.6px !important;
   }
 }
