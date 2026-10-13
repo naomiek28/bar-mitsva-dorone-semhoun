@@ -1358,10 +1358,11 @@ body.invitation-open footer{position:relative;z-index:2}
   }
 }
 @media (max-width: 430px) {
+  .memorial-photo {
+    overflow: visible !important;
+  }
+
   .memorial-letter {
-    font-size: 15px !important;
-    transform: translateY(64px) !important;
-    top: auto !important;
-    padding-bottom: 44px !important;
+    font-size: 15.4px !important;
   }
 }
