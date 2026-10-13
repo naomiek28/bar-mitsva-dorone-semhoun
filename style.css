@@ -1371,3 +1371,32 @@ body.invitation-open footer{position:relative;z-index:2}
     padding: 34px 22px;
   }
 }
+/* CORRECTION : lettre souvenir jamais coupée */
+
+.memorial-photo {
+  height: auto !important;
+  min-height: 760px;
+  overflow: visible !important;
+}
+
+.memorial-letter {
+  height: auto !important;
+  min-height: 760px;
+  padding: 55px 30px !important;
+  transform: none !important;
+  overflow: visible !important;
+}
+
+@media (max-width: 430px) {
+  .memorial-photo,
+  .memorial-letter {
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  .memorial-letter {
+    font-size: 19px !important;
+    line-height: 1.5 !important;
+    padding: 55px 22px !important;
+  }
+}
