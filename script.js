@@ -26,17 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       window.scrollTo(0, 0);
 
-      function startMusic() {
-    if (!music) return;
-
-    if (!musicHasStarted) {
-      try {
-        music.currentTime = 18;
-      } catch (error) {
-        /* Le navigateur appliquera le départ dès que l'audio sera prêt. */
-      }
-      musicHasStarted = true;
-    }
+      startMusic();
 
       window.requestAnimationFrame(function () {
         window.requestAnimationFrame(revealSections);
@@ -189,11 +179,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function startMusic() {
     if (!music) return;
-    musicHasStarted = true;
-    playMusic();
-  }
 
-  function playMusic() {
+    if (!musicHasStarted) {
+      try {
+        music.currentTime = 18;
+      } catch (error) {
+        /* Le navigateur appliquera le départ dès que l'audio sera prêt. */
+      }
+      musicHasStarted = true;
+    }
+
     const playPromise = music.play();
 
     if (playPromise && typeof playPromise.catch === "function") {
