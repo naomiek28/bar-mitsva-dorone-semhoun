@@ -1306,7 +1306,7 @@ body.invitation-open footer{position:relative;z-index:2}
   justify-content: flex-start !important;
   padding: clamp(12px, 3.5vw, 30px) clamp(18px, 5vw, 44px) clamp(16px, 4vw, 32px) !important;
   overflow: hidden;
-  font-size: clamp(10px, 2.7vw, 17px) !important;
+  font-size: 15px !important;;
   line-height: 1.25 !important;
   transform: none !important;
 }
