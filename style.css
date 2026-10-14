@@ -575,7 +575,7 @@ body.motion-ready .paper.visible .hebrew-name span {
   padding: clamp(30px, 8vw, 58px) clamp(24px, 7vw, 54px);
   color: #f4ead8;
   font-family: "Cormorant Garamond", serif;
-  font-size: clamp(19px, 3.9vw, 21px);
+  font-size: clamp(15px, 3.6vw, 19px);
   font-style: italic;
   line-height: 1.48;
   text-align: center;
@@ -1306,7 +1306,7 @@ body.invitation-open footer{position:relative;z-index:2}
   justify-content: flex-start !important;
   padding: clamp(12px, 3.5vw, 30px) clamp(18px, 5vw, 44px) clamp(16px, 4vw, 32px) !important;
   overflow: hidden;
-  font-size: 15px !important;;
+  font-size: clamp(11px, 2.95vw, 18px) !important;
   line-height: 1.25 !important;
   transform: none !important;
 }
@@ -1321,6 +1321,31 @@ body.invitation-open footer{position:relative;z-index:2}
 
 .memorial-signature {
   font-size: clamp(17px, 4.6vw, 26px) !important;
+}
+
+/* Même rendu de l'hommage sur tous les téléphones. */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+.memorial-letter {
+  top: 15% !important;
+  font-size: clamp(12px, 3.75vw, 15px) !important;
+  line-height: 1.22 !important;
+}
+
+.memorial-card .memorial-letter p {
+  margin: 0 0 3px !important;
+  padding: 0 !important;
+}
+
+.memorial-card .memorial-letter .memorial-title {
+  margin-bottom: 3px !important;
+}
+
+.memorial-card .memorial-letter .memorial-signature {
+  margin-top: 3px !important;
 }
 
 /* Sur téléphone : une seule animation stable pour chaque cadre. */
@@ -1356,20 +1381,4 @@ body.invitation-open footer{position:relative;z-index:2}
   body.motion-ready .paper.visible .hebrew-name span {
     animation: hebrewLetterWrite .46s cubic-bezier(.22, 1, .36, 1) var(--letter-delay) forwards !important;
   }
-}
-.memorial-letter {
-  font-size: 15.5px !important;
-  top: 15% !important;
-}
-.memorial-card .memorial-letter p {
-  margin: 0 0 3px !important;
-  padding: 0 !important;
-}
-
-.memorial-card .memorial-letter .memorial-title {
-  margin-bottom: 3px !important;
-}
-
-.memorial-card .memorial-letter .memorial-signature {
-  margin-top: 3px !important;
 }
