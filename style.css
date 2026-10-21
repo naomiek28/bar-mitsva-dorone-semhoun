@@ -959,6 +959,21 @@ fieldset {
   text-align: center !important;
 }
 
+/* Blanc plus franc pour les petits textes italiques des cartes. */
+.paper .side p,
+.paper .close-family,
+.paper .full-name,
+.paper .sentence,
+.paper .at,
+.paper .note,
+.event-card .event-message,
+.event-card .pending p,
+.event-card .evening-time,
+.event-card .shabbat-meal > p,
+.rsvp-card .rsvp-intro {
+  color: #ffffff !important;
+}
+
 
 /* One continuous portrait texture for the entire invitation. */
 .invitation{
