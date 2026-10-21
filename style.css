@@ -935,6 +935,30 @@ fieldset {
   }
 }
 
+/* Ajustements ciblés : hommage et mise des téfilines. */
+.memorial-letter,
+.memorial-letter p,
+.memorial-title,
+.memorial-signature {
+  color: #f0cf7b !important;
+}
+
+#tefilines .at,
+#tefilines h3 {
+  width: 100%;
+  margin-right: auto !important;
+  margin-left: auto !important;
+  color: #fff3dc !important;
+  text-align: center !important;
+}
+
+#tefilines .note {
+  margin-right: auto !important;
+  margin-left: auto !important;
+  color: #d4c6b0;
+  text-align: center !important;
+}
+
 
 /* One continuous portrait texture for the entire invitation. */
 .invitation{
